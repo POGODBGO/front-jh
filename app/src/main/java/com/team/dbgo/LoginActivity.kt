@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             getUserInfoResponse.enqueue(object : Callback<UserInfoResponse> {
                 override fun onResponse(call: Call<UserInfoResponse>?, response: Response<UserInfoResponse>?) {
                     if(response!!.isSuccessful){
-                        if(response!!.body().user_id != null){
+                        if(response!!.body().code == 200){
                             var intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
                         }

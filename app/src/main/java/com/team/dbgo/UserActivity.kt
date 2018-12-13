@@ -32,10 +32,10 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         getUserInfoResponse.enqueue(object : Callback<UserInfoResponse>{
             override fun onResponse(call: Call<UserInfoResponse>?, response: Response<UserInfoResponse>?) {
                 if(response!!.isSuccessful){
-                    level.text = response!!.body().trainer_level.toString()
-                    level_power.text = response!!.body().exp_to_levelup.toString()
-                    user_power.text = response!!.body().exp.toString()
-                    partner_pokemon.text = response!!.body().partner_pokemon
+                    level.text = response!!.body().user.trainer_level.toString()
+                    level_power.text = response!!.body().user.exp_to_levelup.toString()
+                    user_power.text = response!!.body().user.exp.toString()
+                    partner_pokemon.text = response!!.body().user.partner_pokemon
                 }
             }
 
