@@ -9,8 +9,9 @@ interface NetworkService {
     fun getGymPokemon(
     ) : Call<GymPokemonResponse>
 
-    @GET("users/?username=dbmongo&password=test")
-    fun getUserInfo() : Call<UserInfoResponse>
+    @GET("users")
+    fun getUserInfo(@Query("username") username: String?,
+                    @Query("password") password: String?) : Call<UserInfoResponse>
 
     @GET("users/1/pokemons")
     fun getPokemonInfo() : Call<PokemonInfoResponse>
@@ -24,9 +25,11 @@ interface NetworkService {
     @GET("gym/nearby")
     fun getSurrGym() : Call<SurrGymResponse>
 
-    @GET("pokemon/catch?user_id=1&pokemon_id={pokemon_id}")
-    fun getCatchPokemon() : Call<CatchPokemonResponse>
+    @GET("pokemon/catch")
+    fun getCatchPokemon(@Query("user_id") userId: Int,
+                        @Query("pokemon_id") pokemonId: Int) : Call<CatchPokemonResponse>
 
-    @GET("pokemon/evolve?user_id=1&pokemon_seq={pokemon_seq}")
-    fun getEvolvePokemon() : Call<EvolvePokemonResponse>
+    @GET("pokemon/evolve")
+    fun getEvolvePokemon(@Query("user_id") userId: Int,
+                         @Query("pokemon_id") pokemonId: Int) : Call<EvolvePokemonResponse>
 }

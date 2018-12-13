@@ -7,16 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 
-/**
- * 아이템 클릭 리스너
- */
-fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
-    itemView.setOnClickListener {
-        event.invoke(adapterPosition, itemViewType)
-    }
-    return this
-}
-
 
 class MypokemonAdapter(var dataList : ArrayList<MypokemonData>, var requestManager: RequestManager, val onClicked: (position: Int) -> Unit): RecyclerView.Adapter<MypokemonViewHolder>() {
 

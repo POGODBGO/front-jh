@@ -28,14 +28,19 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         networkService = ApplicationController.instance!!.networkService
         requestManager = Glide.with(this)
 
-        val getUserInfoResponse = networkService!!.getUserInfo()
-        getUserInfoResponse.enqueue(object : Callback<UserInfoResponse>{
+        networkService!!.getUserInfo(
+                "dbmongo",
+                "test"
+        ).enqueue(object : Callback<UserInfoResponse>{
             override fun onResponse(call: Call<UserInfoResponse>?, response: Response<UserInfoResponse>?) {
-                if(response!!.isSuccessful){
-                    level.text = response!!.body().user.trainer_level.toString()
-                    level_power.text = response!!.body().user.exp_to_levelup.toString()
-                    user_power.text = response!!.body().user.exp.toString()
-                    partner_pokemon.text = response!!.body().user.partner_pokemon
+                response?.let {
+                    val body = it.body()
+                    if (it.isSuccessful) {
+                        level.text = body.user.trainer_level.toString()
+                        level_power.text = body.user.exp_to_levelup.toString()
+                        user_power.text = body.user.exp.toString()
+                        partner_pokemon.text = body.user.partner_pokemon
+                    }
                 }
             }
 
