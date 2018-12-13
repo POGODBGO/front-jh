@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import kotlinx.android.synthetic.main.activity_mypage.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -16,6 +17,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private var requestManager: RequestManager? = null
 
     override fun onClick(v: View?) {
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
         networkService = ApplicationController.instance!!.networkService
         requestManager = Glide.with(this)
 
@@ -28,23 +36,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<UserInfoResponse>?, response: Response<UserInfoResponse>?) {
                 if(response!!.isSuccessful){
                     if(response!!.body().user_id != null){
-                        val handler = Handler()
-                        handler.postDelayed({
-                            //startActivity(Intent(applicationContext, MainActivity::class.java))
-                            finish()
-                        }, 3000)
+//                        loginButton.setOnClickListener{
+//                            var intent = Intent(this, UserActivity::class.java)
+//                            startActivity(intent)
+//                        }
+
                     }
                 }
             }
 
         })
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
-
     }
 
 

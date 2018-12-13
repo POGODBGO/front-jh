@@ -24,9 +24,9 @@ interface NetworkService {
     @GET("gym/nearby")
     fun getSurrGym() : Call<SurrGymResponse>
 
-    @GET("pokemon/catch?user_id={user_id}&pokemon_id={pokemon_id}")
+    @GET("pokemon/catch?user_id=1&pokemon_id={pokemon_id}")
     fun getCatchPokemon() : Call<CatchPokemonResponse>
 
-    @GET("pokemon/evolve?user_id={user_id}&pokemon_seq={pokemon_seq}")
+    @GET("pokemon/evolve?user_id=1&pokemon_seq={pokemon_seq}")
     fun getEvolvePokemon() : Call<EvolvePokemonResponse>
 }

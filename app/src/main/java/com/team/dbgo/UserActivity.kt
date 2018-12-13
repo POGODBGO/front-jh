@@ -19,7 +19,6 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
     private var requestManager: RequestManager? = null
 
     override fun onClick(v: View?) {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

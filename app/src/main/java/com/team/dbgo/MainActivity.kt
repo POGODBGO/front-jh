@@ -26,14 +26,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var networkService: NetworkService? = null
     private var requestManager: RequestManager? = null
 
-    override fun onClick(v: View?) {
-
-        val idx : Int = pokemonList!!.getChildAdapterPosition(v!!)
-        val name : String? = pokemonDatas!!.get(idx).pokemon_name
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_surrounding)
@@ -86,6 +78,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             var intent = Intent(this, MypageActivity::class.java)
             startActivity(intent)
         }
+
+    }
+    override fun onClick(v: View?) {
+
+        val idx : Int = pokemonList!!.getChildAdapterPosition(v!!)
+        val name : String? = pokemonDatas!!.get(idx).pokemon_name
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
 
     }
 }
