@@ -15,6 +15,8 @@ fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> 
     return this
 }
 
+
+
 class SurrAdapter(val onItemClicked: (data: SurrData) -> Unit,
                   private val onCatchClicked: (data: SurrData) -> Unit) : RecyclerView.Adapter<SurrViewHolder>() {
 
@@ -26,15 +28,15 @@ class SurrAdapter(val onItemClicked: (data: SurrData) -> Unit,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SurrViewHolder {
-        val mainView : View = LayoutInflater.from(parent.context).inflate(R.layout.surr_pokemons, parent, false)
+        val mainView: View = LayoutInflater.from(parent.context).inflate(R.layout.surr_pokemons, parent, false)
         return SurrViewHolder(mainView, onCatchClicked).listen { position, _ ->
             onItemClicked(dataList[position])
         }
     }
 
-    override fun onBindViewHolder(holder: SurrViewHolder, position:  Int) {
+    override fun onBindViewHolder(holder: SurrViewHolder, position: Int) {
         holder.loadView(dataList[position])
     }
 
-    override fun getItemCount() : Int = dataList.size
+    override fun getItemCount(): Int = dataList.size
 }

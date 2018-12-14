@@ -9,7 +9,8 @@ import com.bumptech.glide.RequestManager
 import com.team.dbgo.R.id.parent
 import java.text.FieldPosition
 
-class SurrGymAdapter(val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<SurrGymViewHolder>() {
+
+class SurrGymAdapter(val onItemClicked: (data: SurrGymData) -> Unit) : RecyclerView.Adapter<SurrGymViewHolder>() {
 
     var dataList = emptyList<SurrGymData>()
 
@@ -19,15 +20,16 @@ class SurrGymAdapter(val onItemClicked: (position: Int) -> Unit) : RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SurrGymViewHolder {
-        val mainView : View = LayoutInflater.from(parent.context).inflate(R.layout.surr_gyms, parent, false)
+        val mainView: View = LayoutInflater.from(parent.context).inflate(R.layout.surr_gyms, parent, false)
         return SurrGymViewHolder(mainView).listen { position, _ ->
-            onItemClicked(position)
+
+            onItemClicked(dataList[position])
         }
     }
 
-    override fun onBindViewHolder(holder: SurrGymViewHolder, position:  Int) {
+    override fun onBindViewHolder(holder: SurrGymViewHolder, position: Int) {
         holder.title.text = dataList[position].title
     }
 
-    override fun getItemCount() : Int = dataList.size
+    override fun getItemCount(): Int = dataList.size
 }

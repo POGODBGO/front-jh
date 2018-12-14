@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 
-//class MypokemonAdapter(var dataList : ArrayList<MypokemonData>, var requestManager: RequestManager
-//                       , val onClicked: (position: Int) -> Unit, private val onEvolveClicked: (data:MypokemonData)->Unit) : RecyclerView.Adapter<MypokemonViewHolder>() {
-
 class MypokemonAdapter(var requestManager: RequestManager,val onClicked: (position: Int) -> Unit, private val onEvolveClicked: (data:MypokemonData)->Unit) : RecyclerView.Adapter<MypokemonViewHolder>() {
 
     private var dataList = emptyList<MypokemonData>()
+
 
     fun reloadData(newDataList: List<MypokemonData>) {
         dataList = newDataList

@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private var gymDatas : ArrayList<GymPokemonResponse>? = null
+    private var gymDatas: ArrayList<GymPokemonResponse>? = null
 
     private val adapter1 by lazy {
         SurrAdapter({ data ->
@@ -35,14 +35,10 @@ class MainActivity : AppCompatActivity() {
                     })
         })
     }
-
     private val adapter2 by lazy {
-        SurrGymAdapter ({ position ->
-
-            var intent=Intent(this, GymActivity::class.java)
-            intent.putExtra("gym_id", position)
-            startActivity(intent)
-        })
+        SurrGymAdapter { data ->
+            Toast.makeText(this,  data.title, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private var networkService: NetworkService? = null
@@ -59,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         requestManager = Glide.with(this)
 
         networkService!!.getSurrPoke()
-                .enqueue(object : retrofit2.Callback<SurrPokeResponse>{
+                .enqueue(object : retrofit2.Callback<SurrPokeResponse> {
                     override fun onFailure(call: Call<SurrPokeResponse>?, t: Throwable?) {
                         ApplicationController.instance!!.makeToast("통신 확인")
                     }
@@ -77,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         surr_gym_list.adapter = adapter2
 
         val getSurrGymResponse = networkService!!.getSurrGym()
-        getSurrGymResponse.enqueue(object : retrofit2.Callback<SurrGymResponse>{
+        getSurrGymResponse.enqueue(object : retrofit2.Callback<SurrGymResponse> {
             override fun onFailure(call: Call<SurrGymResponse>?, t: Throwable?) {
                 ApplicationController.instance!!.makeToast("통신 확인")
             }
@@ -91,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-        go_to_mypage.setOnClickListener{
+        go_to_mypage.setOnClickListener {
             val intent = Intent(this, MypageActivity::class.java)
             startActivity(intent)
         }
