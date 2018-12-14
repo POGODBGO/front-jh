@@ -32,15 +32,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         requestManager = Glide.with(this)
 
         loginButton.setOnClickListener{
-            val getUserInfoResponse = networkService!!.getUserInfo()
-            getUserInfoResponse.enqueue(object : Callback<UserInfoResponse> {
+            networkService!!.getUserInfo(
+                    idInput.text.toString(),
+                    passwordInput.text.toString()
+            ).enqueue(object : Callback<UserInfoResponse> {
                 override fun onResponse(call: Call<UserInfoResponse>?, response: Response<UserInfoResponse>?) {
-                    if(response!!.isSuccessful){
-                        if(response!!.body().code == 200){
-                            var intent = Intent(applicationContext, MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                        else {
+                    response?.let {
+                        if (it.isSuccessful) {
+                            if (it.body().code == 200) {
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            }
+                        } else {
                             ApplicationController.instance!!.makeToast("아이디 혹은 비밀번호를 확인하세요!")
                         }
                     }

@@ -33,6 +33,7 @@ class GymActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    var gym_id : Int ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +45,9 @@ class GymActivity : AppCompatActivity(), View.OnClickListener {
 
         pokemonList = findViewById(R.id.gym_pokemon_list) as RecyclerView
         pokemonList!!.layoutManager = LinearLayoutManager(this)
+        gym_id = intent.getIntExtra("gym_id", 3)
 
-
-        val getGymPokemonResponse = networkService!!.getGymPokemon()
+        val getGymPokemonResponse = networkService!!.getGymPokemon(gym_id!!)
         getGymPokemonResponse.enqueue(object : retrofit2.Callback<GymPokemonResponse>{
             override fun onFailure(call: Call<GymPokemonResponse>?, t: Throwable?) {
                 ApplicationController.instance!!.makeToast("통신 확인")
@@ -55,6 +56,7 @@ class GymActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<GymPokemonResponse>?, response: Response<GymPokemonResponse>?) {
                 if(response!!.isSuccessful){
                     if(response!!.body().results != null){
+
                         adapter = GymAdapter(response!!.body().results, requestManager!!)
                         pokemonDatas = response!!.body().results
                         pokemonList!!.adapter = adapter

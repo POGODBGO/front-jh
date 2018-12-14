@@ -31,7 +31,7 @@ class MypageActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         logout.setOnClickListener{
-            var intent = Intent(this, GymActivity::class.java)
+            var intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
 
         }

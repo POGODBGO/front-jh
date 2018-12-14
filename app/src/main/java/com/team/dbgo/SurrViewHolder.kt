@@ -2,8 +2,16 @@ package com.team.dbgo
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
+import kotlinx.android.synthetic.main.surr_pokemons.view.*
 
-class SurrViewHolder(itemView : View?) : RecyclerView.ViewHolder(itemView!!) {
-    var surr_pokemon_name : TextView = itemView!!.findViewById(R.id.surr_pokemon_name) as TextView
+class SurrViewHolder(itemView : View, val onCatchClicked: (data: SurrData) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    private val nameView = itemView.surr_pokemon_name
+    private val catchButton = itemView.catchButton
+
+    fun loadView(data: SurrData) {
+        nameView.text = data.pokemon_name
+        catchButton.setOnClickListener {
+            onCatchClicked(data)
+        }
+    }
 }
