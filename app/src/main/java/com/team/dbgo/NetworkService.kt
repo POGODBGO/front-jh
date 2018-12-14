@@ -32,5 +32,5 @@ interface NetworkService {
 
     @GET("pokemon/evolve")
     fun getEvolvePokemon(@Query("user_id") userId: Int,
-                         @Query("pokemon_id") pokemonId: Int) : Call<EvolvePokemonResponse>
+                         @Query("pokemon_seq") seq: Int) : Call<EvolvePokemonResponse>
 }
